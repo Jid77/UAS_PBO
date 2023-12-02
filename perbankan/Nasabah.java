@@ -71,4 +71,9 @@ public void transfer(Nasabah penerima, int jumlah) {
     public String getPassword() {
         return password;
     }
+
+    public void setPassword(String newPassword) {
+        this.password = newPassword;
+    }
+    
 }

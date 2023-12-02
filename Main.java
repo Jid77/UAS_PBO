@@ -162,6 +162,7 @@ private static void tambahNasabah() {
                 System.out.println("4. Lihat Riwayat Transaksi");
                 System.out.println("5. Cek Saldo");
                 System.out.println("6. Layanan Pelanggan");
+                System.out.println("7. Ganti Password");
                 System.out.println("0. Logout");
                 System.out.print("Masukkan pilihan: ");
                 pilihan = scanner.nextInt();
@@ -225,6 +226,19 @@ private static void tambahNasabah() {
                             break;
                         case 6:
                             tambahKritikSaran(nasabah);
+                            break;
+                        case 7:
+                            System.out.print("Masukkan password lama: ");
+                            String oldPassword = scanner.next();
+
+                            while (!nasabah.authenticate(nasabah.getUsername(), oldPassword)) {
+                                System.out.println("Password lama tidak cocok.");
+                                System.out.print("Masukkan password lama: ");
+                                oldPassword = scanner.next();
+                            }
+                                UbahPassword changer = new UbahPassword(nasabah, scanner);
+                                changer.ubahPassword();
+
                             break;
                         case 0:
                         System.out.println("Berhasil logout.");
