@@ -1,25 +1,12 @@
 package perbankan;
 
 import java.io.BufferedReader;
-import java.io.BufferedWriter;
 import java.io.FileReader;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Database {
-    public static void saveNasabahData(List<Nasabah> nasabahs) {
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter("nasabahs.txt"))) {
-            for (Nasabah nasabah : nasabahs) {
-                writer.write(nasabah.getUsername() + " " + nasabah.getPassword() + " " + nasabah.getSaldo());
-                writer.newLine();
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
+class Database {
     public static List<Nasabah> loadNasabahData() {
         List<Nasabah> loadedNasabahs = new ArrayList<>();
         try (BufferedReader reader = new BufferedReader(new FileReader("nasabahs.txt"))) {
@@ -30,8 +17,13 @@ public class Database {
                 String username = data[0];
                 String password = data[1];
                 int saldo = Integer.parseInt(data[2]);
+                String namaBank = data[3]; // Baca nama bank dari data
 
-                Nasabah nasabah = new Nasabah(username, password);
+                // Jika informasi bank ada di posisi tetap, dan nomor rekening juga tersimpan dalam file
+                String nomorRekening = data[4]; // Misalnya nomor rekening ada di posisi kelima
+
+                Bank bankNasabah = new Bank(namaBank, nomorRekening);
+                Nasabah nasabah = new Nasabah(username, password, bankNasabah);
                 nasabah.deposit(saldo);
 
                 loadedNasabahs.add(nasabah);

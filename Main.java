@@ -8,7 +8,6 @@ import java.util.Scanner;
 public class Main {
     private static List<Nasabah> nasabahs = new ArrayList<>();
     private static Admin admin;
-
     public static void main(String[] args) {
         nasabahs = Database.loadNasabahData();
 
@@ -25,15 +24,17 @@ public class Main {
     }
 
     private static void saveNasabahData() {
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter("nasabahs.txt"))) {
-            for (Nasabah nasabah : nasabahs) {
-                writer.write(nasabah.getUsername() + " " + nasabah.getPassword() + " " + nasabah.getSaldo());
-                writer.newLine();
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
+    try (BufferedWriter writer = new BufferedWriter(new FileWriter("nasabahs.txt"))) {
+        for (Nasabah nasabah : nasabahs) {
+            writer.write(nasabah.getUsername() + " " + nasabah.getPassword() + " " + nasabah.getSaldo() +
+                         " " + nasabah.getInfoBank().getNamaBank() + " " + nasabah.getInfoBank().getNomorRekening());
+            writer.newLine();
         }
+    } catch (IOException e) {
+        e.printStackTrace();
     }
+}
+
 
     private static void login() {
         try (Scanner scanner = new Scanner(System.in)) {
@@ -109,8 +110,13 @@ private static void tambahNasabah() {
             String newUsername = scanner.nextLine();
             System.out.print("Masukkan password untuk nasabah baru: ");
             String newPassword = scanner.nextLine();
+            System.out.print("Masukkan nama bank: ");
+            String namaBank = scanner.nextLine();
+            System.out.print("Masukkan nomor rekening: ");
+            String nomorRekening = scanner.nextLine();
 
-            Nasabah newNasabah = new Nasabah(newUsername, newPassword);
+            Bank bankNasabah = new Bank(namaBank, nomorRekening);
+            Nasabah newNasabah = new Nasabah(newUsername, newPassword, bankNasabah);
             nasabahs.add(newNasabah);
 
             // Simpan ke file setelah menambahkan nasabah baru
@@ -121,6 +127,7 @@ private static void tambahNasabah() {
         System.out.println("Hanya admin yang dapat menambah nasabah baru.");
     }
 }
+
 
 
     private static void hapusNasabah() {
@@ -144,6 +151,7 @@ private static void tambahNasabah() {
         try (Scanner scanner = new Scanner(System.in)) {
             int pilihan;
             do {
+                System.out.println("\nMenu Nasabah");
                 System.out.println("\n1. Deposit");
                 System.out.println("2. Tarik Tunai");
                 System.out.println("3. Transfer");
@@ -186,9 +194,9 @@ private static void tambahNasabah() {
                             Nasabah penerima = getNasabahByUsername(recipientUsername);
                             if (penerima != null) {
                                 System.out.print("Masukkan jumlah yang akan ditransfer: ");
-                                int transferAmount = scanner.nextInt();
-                                if (transferAmount > 0 && transferAmount <= nasabah.getSaldo()) {
-                                    nasabah.transfer(penerima, transferAmount);
+                                int transferjumlah = scanner.nextInt();
+                                if (transferjumlah > 0 && transferjumlah <= nasabah.getSaldo()) {
+                                    nasabah.transfer(penerima, transferjumlah);
                                     System.out.println("Transfer berhasil dilakukan.");
                                 } else {
                                     System.out.println("Jumlah tidak valid atau saldo tidak mencukupi untuk transfer.");
