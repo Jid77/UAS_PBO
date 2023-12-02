@@ -1,12 +1,10 @@
-package perbankan;
-
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-class Database {
+public class Database {
     public static List<Nasabah> loadNasabahData() {
         List<Nasabah> loadedNasabahs = new ArrayList<>();
         try (BufferedReader reader = new BufferedReader(new FileReader("nasabahs.txt"))) {

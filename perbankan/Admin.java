@@ -1,8 +1,10 @@
-package perbankan;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.List;
 
-class Admin extends User {
+public class Admin extends User {
     public Admin(String username, String password) {
         super(username, password);
     }
@@ -19,4 +21,29 @@ class Admin extends User {
             System.out.println();
         }
     }
+    public void bacaFeedback() {
+        try (BufferedReader reader = new BufferedReader(new FileReader("feedbacks.txt"))) {
+            String line;
+            boolean isFeedback = false;
+            StringBuilder feedbackInfo = new StringBuilder();
+            while ((line = reader.readLine()) != null) {
+                if (line.startsWith("Nasabah: ")) {
+                    isFeedback = true;
+                    feedbackInfo.append(line).append("\n");
+                } else if (line.startsWith("Tanggal: ") || line.startsWith("Rating: ") || line.startsWith("Kritik/Saran: ")) {
+                    feedbackInfo.append(line).append("\n");
+                } else if (line.equals("-----------------------------------")) {
+                    if (isFeedback) {
+                        isFeedback = false;
+                        System.out.println(feedbackInfo.toString());
+                        feedbackInfo.setLength(0); // Reset StringBuilder untuk feedback berikutnya
+                        System.out.println();
+                    }
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
 }

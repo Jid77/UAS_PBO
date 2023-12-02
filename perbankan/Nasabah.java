@@ -1,9 +1,7 @@
-package perbankan;
-
 import java.util.ArrayList;
 import java.util.List;
 
-class Nasabah extends User {
+public class Nasabah extends User {
     private int saldo;
     private List<Transaksi> riwayatTransaksi;
     private Bank infoBank;

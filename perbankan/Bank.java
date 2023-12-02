@@ -1,6 +1,4 @@
-package perbankan;
-
-class Bank {
+public class Bank {
     private String namaBank;
     private String nomorRekening;
 

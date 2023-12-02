@@ -65,8 +65,10 @@ private static void menuAdmin() {
         do {
             System.out.println("\nMenu Admin:");
             System.out.println("1. Tambah Nasabah");
-            System.out.println("2. Lihat Data Nasabah");
-            System.out.println("3. Hapus Nasabah");
+            System.out.println("2. Hapus Nasabah");
+            System.out.println("3. Lihat Data Nasabah");
+            System.out.println("4. Feedback Nasabah");
+
             System.out.println("0. Logout");
             System.out.print("Masukkan pilihan: ");
             
@@ -79,10 +81,13 @@ private static void menuAdmin() {
                         tambahNasabah();
                         break;
                     case 2:
-                        admin.lihatInfoSemuaNasabah(nasabahs);
+                    hapusNasabah();
                         break;
                     case 3:
-                        hapusNasabah();
+                    admin.lihatInfoSemuaNasabah(nasabahs);
+                        break;
+                    case 4:
+                        admin.bacaFeedback();
                         break;
                     case 0:
                         System.out.println("Berhasil logout.");
@@ -151,13 +156,12 @@ private static void tambahNasabah() {
         try (Scanner scanner = new Scanner(System.in)) {
             int pilihan;
             do {
-                System.out.println("\nMenu Nasabah");
                 System.out.println("\n1. Deposit");
-                System.out.println("2. Tarik Tunai");
+                System.out.println("2. Penarikan");
                 System.out.println("3. Transfer");
                 System.out.println("4. Lihat Riwayat Transaksi");
-                System.out.println("5. Tambah Nasabah");
-                System.out.println("6. Cek Saldo");
+                System.out.println("5. Cek Saldo");
+                System.out.println("6. Layanan Pelanggan");
                 System.out.println("0. Logout");
                 System.out.print("Masukkan pilihan: ");
                 pilihan = scanner.nextInt();
@@ -217,11 +221,12 @@ private static void tambahNasabah() {
                             }
                             break;
                         case 5:
-                            tambahNasabah();
+                            System.out.println("Saldo Anda saat ini: " + nasabah.getSaldo());
                             break;
                         case 6:
-                            System.out.println("Saldo Anda saat ini: " + nasabah.getSaldo());
-                            break;                    case 0:
+                            tambahKritikSaran(nasabah);
+                            break;
+                        case 0:
                         System.out.println("Berhasil logout.");
                         break;
                     default:
@@ -232,6 +237,22 @@ private static void tambahNasabah() {
         }
     }
 
+    private static void tambahKritikSaran(Nasabah nasabah) {
+        try (Scanner scanner = new Scanner(System.in)) {
+            System.out.print("Masukkan kritik atau saran Anda: ");
+            String kritikSaran = scanner.nextLine();
+   
+            System.out.print("Beri rating (dari 1 hingga 5): ");
+            int rating = scanner.nextInt();
+   
+            Feedback feedback = new Feedback(nasabah, kritikSaran, rating);
+            feedback.saveFeedbackToFile();
+        }
+        System.out.println("Terima kasih atas kritik dan sarannya!");
+    }
+    
+    
+    
     private static Nasabah getNasabahByUsername(String username) {
         for (Nasabah nasabah : nasabahs) {
             if (nasabah.getUsername().equals(username)) {
