@@ -1,7 +1,8 @@
 package perbankan;
+
 import java.util.List;
 
-public class Admin extends User {
+class Admin extends User {
     public Admin(String username, String password) {
         super(username, password);
     }
@@ -12,6 +13,7 @@ public class Admin extends User {
             for (Transaksi transaksi : nasabah.getRiwayatTransaksi()) {
                 System.out.println("Transaksi: " + transaksi.getJenis() + ", Jumlah: " + transaksi.getJumlah());
             }
+            System.out.println("");
         }
     }
 }

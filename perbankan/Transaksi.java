@@ -1,6 +1,6 @@
 package perbankan;
 
-public class Transaksi {
+class Transaksi {
     private String jenis;
     private int jumlah;
 
