@@ -36,7 +36,7 @@ public class Admin extends User {
                     if (isFeedback) {
                         isFeedback = false;
                         System.out.println(feedbackInfo.toString());
-                        feedbackInfo.setLength(0); // Reset StringBuilder untuk feedback berikutnya
+                        feedbackInfo.setLength(0); 
                         System.out.println();
                     }
                 }

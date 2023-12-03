@@ -15,10 +15,8 @@ public class Database {
                 String username = data[0];
                 String password = data[1];
                 int saldo = Integer.parseInt(data[2]);
-                String namaBank = data[3]; // Baca nama bank dari data
-
-                // Jika informasi bank ada di posisi tetap, dan nomor rekening juga tersimpan dalam file
-                String nomorRekening = data[4]; // Misalnya nomor rekening ada di posisi kelima
+                String namaBank = data[3]; 
+                String nomorRekening = data[4]; 
 
                 Bank bankNasabah = new Bank(namaBank, nomorRekening);
                 Nasabah nasabah = new Nasabah(username, password, bankNasabah);

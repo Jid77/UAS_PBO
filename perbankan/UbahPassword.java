@@ -24,7 +24,7 @@ class UbahPassword {
     }
 
     private boolean isValidPassword(String password) {
-        // Validasi untuk minimal 8 karakter, minimal satu huruf besar, huruf kecil, dan angka
+        // Validasi  minimal 8 karakter, minimal satu huruf besar, huruf kecil, dan angka
         return password.matches("(?=.*[A-Z])(?=.*[a-z])(?=.*\\d).{8,}");
     }
 }

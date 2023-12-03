@@ -3,8 +3,4 @@ Tanggal: 02-12-2023 21:11:33
 Rating: 4
 Kritik/Saran: Mantap ini
 -----------------------------------
-Nasabah: Jidan
-Tanggal: 02-12-2023 21:18:20
-Rating: 1
-Kritik/Saran: Jelek
------------------------------------
+

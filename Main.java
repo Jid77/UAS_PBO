@@ -10,7 +10,6 @@ public class Main {
     private static Admin admin;
     public static void main(String[] args) {
         nasabahs = Database.loadNasabahData();
-
         admin = new Admin("admin", "admin");
 
         if (nasabahs.isEmpty()) {
@@ -72,10 +71,9 @@ private static void menuAdmin() {
             System.out.println("0. Logout");
             System.out.print("Masukkan pilihan: ");
             
-            // Memeriksa apakah input selanjutnya adalah integer sebelum membacanya
             if(scanner.hasNextInt()) {
                 choice = scanner.nextInt();
-                scanner.nextLine(); // untuk membersihkan newline dari buffer
+                scanner.nextLine();
                 switch (choice) {
                     case 1:
                         tambahNasabah();
@@ -99,7 +97,7 @@ private static void menuAdmin() {
                 }
             } else {
                 System.out.println("Input yang dimasukkan tidak valid.");
-                scanner.nextLine(); // membersihkan buffer dari input tidak valid
+                scanner.nextLine(); 
             }
         } while (!logout);
     }
