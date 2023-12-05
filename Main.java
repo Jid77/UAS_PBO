@@ -126,6 +126,7 @@ private static void tambahNasabah() {
             saveNasabahData();
         }
         System.out.println("Nasabah baru berhasil ditambahkan.");
+        menuAdmin();
     } else {
         System.out.println("Hanya admin yang dapat menambah nasabah baru.");
     }
@@ -143,7 +144,7 @@ private static void tambahNasabah() {
                 nasabahs.remove(nasabah);
                 System.out.println("Nasabah dengan username " + username + " telah dihapus.");
                  saveNasabahData();
-
+                 menuAdmin();
             } else {
                 System.out.println("Nasabah tidak ditemukan.");
             }
