@@ -95,8 +95,10 @@ private static void menuAdmin() {
                         System.out.println("Pilihan tidak valid.");
                         break;
                 }
-            } else {
+            } 
+            else {
                 System.out.println("Input yang dimasukkan tidak valid.");
+                
                 scanner.nextLine(); 
             }
         } while (!logout);
@@ -124,9 +126,11 @@ private static void tambahNasabah() {
 
             // Simpan ke file setelah menambahkan nasabah baru
             saveNasabahData();
-        }
-        System.out.println("Nasabah baru berhasil ditambahkan.");
+            System.out.println("Nasabah baru berhasil ditambahkan.");
+        
         menuAdmin();
+        }
+
     } else {
         System.out.println("Hanya admin yang dapat menambah nasabah baru.");
     }
